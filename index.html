@@ -1,68 +1,58 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Got API 文档</title>
+<title>Got API Docs</title>
 <style>
-  :root {
-    --bg: #ffffff;
-    --fg: #1a1a2e;
-    --muted: #6b7280;
-    --border: #e5e7eb;
-    --accent: #667eea;
-    --accent2: #764ba2;
-    --card: #f8f9fc;
-    --code-bg: #f3f4f6;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; color: var(--fg); background: var(--bg); line-height: 1.7; }
-  .nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); padding: 0 24px; }
-  .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; height: 56px; gap: 24px; }
-  .nav-logo { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 16px; text-decoration: none; color: var(--fg); }
-  .nav-logo img { width: 24px; height: 24px; border-radius: 6px; }
-  .nav-links { display: flex; gap: 16px; margin-left: auto; }
-  .nav-links a { text-decoration: none; color: var(--muted); font-size: 14px; font-weight: 500; transition: color .2s; }
-  .nav-links a:hover { color: var(--fg); }
-  .layout { display: flex; max-width: 1200px; margin: 0 auto; min-height: calc(100vh - 56px); }
-  .sidebar { width: 260px; flex-shrink: 0; padding: 32px 16px 32px 0; border-right: 1px solid var(--border); position: sticky; top: 56px; height: calc(100vh - 56px); overflow-y: auto; }
-  .sidebar::-webkit-scrollbar { width: 4px; }
-  .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-  .sidebar-group { margin-bottom: 24px; }
-  .sidebar-group-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 8px; padding-left: 12px; }
-  .sidebar a { display: block; padding: 6px 12px; font-size: 14px; color: var(--muted); text-decoration: none; border-radius: 6px; transition: all .15s; }
-  .sidebar a:hover { background: var(--card); color: var(--fg); }
-  .sidebar a.active { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; font-weight: 500; }
-  .content { flex: 1; padding: 40px 48px 80px; max-width: 800px; }
-  .content h1 { font-size: 2rem; font-weight: 800; margin: 0 0 8px; letter-spacing: -0.02em; }
-  .content h2 { font-size: 1.4rem; font-weight: 700; margin: 40px 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
-  .content h3 { font-size: 1.1rem; font-weight: 600; margin: 28px 0 8px; }
-  .content p { margin: 0 0 16px; color: #374151; font-size: 15px; }
-  .content ul, .content ol { margin: 0 0 16px; padding-left: 20px; color: #374151; font-size: 15px; }
-  .content li { margin-bottom: 4px; }
-  .content code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', monospace; }
-  .content pre { background: #1e1e2e; color: #cdd6f4; padding: 16px 20px; border-radius: 10px; overflow-x: auto; font-size: 13px; line-height: 1.6; margin: 0 0 20px; font-family: 'SF Mono', 'Fira Code', monospace; }
-  .content pre code { background: none; padding: 0; font-size: 13px; color: inherit; }
-  .content img { max-width: 100%; border-radius: 10px; margin: 16px 0; }
-  .card { background: var(--card); border-radius: 10px; padding: 20px; margin: 0 0 16px; }
-  .card h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
-  .card p { font-size: 14px; color: var(--muted); margin: 0; }
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 0 0 20px; }
-  .tag { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; margin-right: 6px; margin-bottom: 6px; }
-  .tag-blue { background: #eef2ff; color: #4f46e5; }
-  .tag-green { background: #ecfdf5; color: #059669; }
-  .tag-purple { background: #f5f3ff; color: #7c3aed; }
-  .tag-orange { background: #fff7ed; color: #ea580c; }
-  .faq-item { border-bottom: 1px solid var(--border); padding: 16px 0; }
-  .faq-item h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; cursor: pointer; }
-  .faq-item h4:hover { color: var(--accent); }
-  .faq-item p { font-size: 14px; color: var(--muted); margin: 0; }
-  .footer { text-align: center; padding: 32px 0; color: var(--muted); font-size: 13px; border-top: 1px solid var(--border); margin-top: 48px; }
-  @media (max-width: 768px) {
-    .sidebar { display: none; }
-    .content { padding: 24px 20px 60px; }
-    .grid-2 { grid-template-columns: 1fr; }
-  }
+  :root { --bg:#fff; --fg:#1a1a2e; --muted:#6b7280; --border:#e5e7eb; --accent:#667eea; --accent2:#764ba2; --card:#f8f9fc; --code-bg:#f3f4f6; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif; color:var(--fg); background:var(--bg); line-height:1.7; }
+  .nav { position:sticky; top:0; z-index:100; background:rgba(255,255,255,0.95); backdrop-filter:blur(8px); border-bottom:1px solid var(--border); padding:0 24px; }
+  .nav-inner { max-width:1200px; margin:0 auto; display:flex; align-items:center; height:56px; gap:24px; }
+  .nav-logo { display:flex; align-items:center; gap:8px; font-weight:700; font-size:16px; text-decoration:none; color:var(--fg); }
+  .nav-logo img { width:24px; height:24px; border-radius:6px; }
+  .nav-links { display:flex; gap:16px; margin-left:auto; align-items:center; }
+  .nav-links a { text-decoration:none; color:var(--muted); font-size:14px; font-weight:500; transition:color .2s; }
+  .nav-links a:hover { color:var(--fg); }
+  .lang-btn { background:none; border:1px solid var(--border); border-radius:6px; padding:4px 10px; font-size:13px; cursor:pointer; color:var(--muted); transition:all .15s; }
+  .lang-btn:hover { border-color:var(--accent); color:var(--accent); }
+  .layout { display:flex; max-width:1200px; margin:0 auto; min-height:calc(100vh - 56px); }
+  .sidebar { width:240px; flex-shrink:0; padding:32px 12px 32px 0; border-right:1px solid var(--border); position:sticky; top:56px; height:calc(100vh - 56px); overflow-y:auto; }
+  .sidebar::-webkit-scrollbar { width:4px; }
+  .sidebar::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
+  .sidebar-group { margin-bottom:20px; }
+  .sidebar-group-title { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; color:var(--muted); margin-bottom:6px; padding-left:12px; }
+  .sidebar a { display:block; padding:6px 12px; font-size:14px; color:var(--muted); text-decoration:none; border-radius:6px; transition:all .15s; scroll-margin-top:70px; }
+  .sidebar a:hover { background:var(--card); color:var(--fg); }
+  .sidebar a.active { background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; font-weight:500; }
+  .content { flex:1; padding:40px 48px 80px; max-width:800px; }
+  .content h1 { font-size:2rem; font-weight:800; margin:0 0 8px; letter-spacing:-0.02em; }
+  .content h2 { font-size:1.4rem; font-weight:700; margin:40px 0 12px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+  .content h3 { font-size:1.1rem; font-weight:600; margin:28px 0 8px; }
+  .content p { margin:0 0 16px; color:#374151; font-size:15px; }
+  .content ul,.content ol { margin:0 0 16px; padding-left:20px; color:#374151; font-size:15px; }
+  .content li { margin-bottom:4px; }
+  .content code { background:var(--code-bg); padding:2px 6px; border-radius:4px; font-size:13px; font-family:'SF Mono','Fira Code',monospace; }
+  .content pre { background:#1e1e2e; color:#cdd6f4; padding:16px 20px; border-radius:10px; overflow-x:auto; font-size:13px; line-height:1.6; margin:0 0 20px; font-family:'SF Mono','Fira Code',monospace; }
+  .content pre code { background:none; padding:0; font-size:13px; color:inherit; }
+  .card { background:var(--card); border-radius:10px; padding:20px; margin:0 0 16px; }
+  .card h4 { font-size:14px; font-weight:600; margin-bottom:4px; }
+  .card p { font-size:14px; color:var(--muted); margin:0; }
+  .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:0 0 20px; }
+  .tag { display:inline-block; padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; margin-right:6px; margin-bottom:6px; }
+  .tag-blue { background:#eef2ff; color:#4f46e5; }
+  .tag-green { background:#ecfdf5; color:#059669; }
+  .tag-purple { background:#f5f3ff; color:#7c3aed; }
+  .tag-orange { background:#fff7ed; color:#ea580c; }
+  .faq-item { border-bottom:1px solid var(--border); padding:16px 0; }
+  .faq-item h4 { font-size:15px; font-weight:600; margin-bottom:6px; cursor:pointer; }
+  .faq-item h4:hover { color:var(--accent); }
+  .faq-item p { font-size:14px; color:var(--muted); margin:0; }
+  .footer { text-align:center; padding:32px 0; color:var(--muted); font-size:13px; border-top:1px solid var(--border); margin-top:48px; }
+  [data-lang] { display:none; }
+  [data-lang="en"] { display:block; }
+  @media (max-width:768px) { .sidebar { display:none; } .content { padding:24px 20px 60px; } .grid-2 { grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -74,64 +64,72 @@
       Got API
     </a>
     <div class="nav-links">
-      <a href="https://gotapi.ai">返回官网</a>
-      <a href="https://gotapi.ai/about">关于我们</a>
+      <a href="https://gotapi.ai">Home</a>
+      <button class="lang-btn" id="langToggle" onclick="toggleLang()">中</button>
     </div>
   </div>
 </nav>
 
 <div class="layout">
-  <aside class="sidebar">
+  <!-- ======== SIDEBAR ======== -->
+  <aside class="sidebar" id="sidebar">
     <div class="sidebar-group">
-      <div class="sidebar-group-title">快速开始</div>
-      <a href="#quickstart" class="active">快速入门</a>
-      <a href="#register">注册与登录</a>
-      <a href="#api-key">获取 API Key</a>
+      <div class="sidebar-group-title" data-lang="en">Getting Started</div>
+      <div class="sidebar-group-title" data-lang="zh" style="display:none">快速开始</div>
+      <a href="#quickstart" data-lang-key="sidebar.quickstart">Quick Start</a>
+      <a href="#register" data-lang-key="sidebar.register">Sign Up &amp; Login</a>
+      <a href="#api-key" data-lang-key="sidebar.apikey">Get API Key</a>
     </div>
     <div class="sidebar-group">
-      <div class="sidebar-group-title">用户指南</div>
-      <a href="#api-usage">使用 API</a>
-      <a href="#token">令牌管理</a>
-      <a href="#models">模型与定价</a>
-      <a href="#apps">客户端集成</a>
-      <a href="#logs">使用记录</a>
-      <a href="#topup">充值与管理</a>
+      <div class="sidebar-group-title" data-lang="en">User Guide</div>
+      <div class="sidebar-group-title" data-lang="zh" style="display:none">用户指南</div>
+      <a href="#api-usage" data-lang-key="sidebar.usage">Using the API</a>
+      <a href="#token" data-lang-key="sidebar.token">Token Management</a>
+      <a href="#models" data-lang-key="sidebar.models">Models &amp; Pricing</a>
+      <a href="#apps" data-lang-key="sidebar.apps">Client Integration</a>
+      <a href="#logs" data-lang-key="sidebar.logs">Usage Logs</a>
+      <a href="#topup" data-lang-key="sidebar.topup">Billing &amp; Top-Up</a>
     </div>
     <div class="sidebar-group">
-      <div class="sidebar-group-title">平台信息</div>
-      <a href="#integrations">生态整合</a>
-      <a href="#security">安全与合规</a>
-      <a href="#faq">常见问题 (FAQ)</a>
+      <div class="sidebar-group-title" data-lang="en">Platform</div>
+      <div class="sidebar-group-title" data-lang="zh" style="display:none">平台信息</div>
+      <a href="#integrations" data-lang-key="sidebar.integrations">Ecosystem</a>
+      <a href="#security" data-lang-key="sidebar.security">Security &amp; Compliance</a>
+      <a href="#faq" data-lang-key="sidebar.faq">FAQ</a>
     </div>
   </aside>
 
+  <!-- ======== MAIN CONTENT ======== -->
   <main class="content">
 
-    <h1>Got API 文档</h1>
-    <p style="font-size:16px;color:var(--muted);margin-bottom:32px;">统一 API 网关，服务于海量 AI 模型。通过标准 OpenAI 兼容接口，一个地址访问数十种模型。</p>
+    <!-- ===== ENGLISH ===== -->
+    <div data-lang="en">
 
-    <!-- Quick Start -->
-    <h2 id="quickstart">快速入门</h2>
-    <p>Got API 提供与 OpenAI API 完全兼容的接口，您可以使用标准的 <code>curl</code>、Python、JavaScript 等工具直接调用。</p>
-    <h3>1. 获取 API 地址</h3>
-    <p>登录后，在控制台首页即可看到您的专属 API 地址：</p>
+    <h1>Got API Documentation</h1>
+    <p style="font-size:16px;color:var(--muted);margin-bottom:32px;">Unified API Gateway — one endpoint to access hundreds of AI models. Fully compatible with the OpenAI API format.</p>
+
+    <h2 id="quickstart">Quick Start</h2>
+    <p>Got API exposes a fully OpenAI-compatible API. Use any OpenAI SDK with your custom base URL and API key.</p>
+
+    <h3>1. API Endpoint</h3>
+    <p>Your base URL is:</p>
     <pre><code>https://gotapi.ai/v1</code></pre>
 
-    <h3>2. 调用 Chat Completions</h3>
+    <h3>2. Chat Completion (cURL)</h3>
     <pre><code>curl https://gotapi.ai/v1/chat/completions \
-  -H "Authorization: Bearer sk-你的令牌" \
+  -H "Authorization: Bearer sk-your-token" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "gpt-4o",
     "messages": [{"role": "user", "content": "Hello!"}]
   }'</code></pre>
 
-    <h3>3. Python 调用示例</h3>
+    <h3>3. Python (OpenAI SDK)</h3>
     <pre><code>from openai import OpenAI
 
 client = OpenAI(
     base_url="https://gotapi.ai/v1",
-    api_key="sk-你的令牌"
+    api_key="sk-your-token"
 )
 
 response = client.chat.completions.create(
@@ -140,200 +138,301 @@ response = client.chat.completions.create(
 )
 print(response.choices[0].message.content)</code></pre>
 
-    <!-- Register -->
-    <h2 id="register">注册与登录</h2>
-    <p>Got API 支持多种注册和登录方式：</p>
+    <h3>4. Node.js (OpenAI SDK)</h3>
+    <pre><code>import OpenAI from 'openai';
+
+const client = new OpenAI({
+  baseURL: 'https://gotapi.ai/v1',
+  apiKey: 'sk-your-token'
+});
+
+const response = await client.chat.completions.create({
+  model: 'gpt-4o',
+  messages: [{ role: 'user', content: 'Hello!' }]
+});
+console.log(response.choices[0].message.content);</code></pre>
+
+    <h2 id="register">Sign Up &amp; Login</h2>
+    <p>Got API supports multiple ways to create and access your account:</p>
     <ul>
-      <li><strong>邮箱注册</strong> — 使用邮箱地址创建账号</li>
-      <li><strong>GitHub OAuth</strong> — 使用 GitHub 账号快速登录</li>
-      <li><strong>Discord OAuth</strong> — 使用 Discord 账号快速登录</li>
+      <li><strong>Email &amp; Password</strong> — Register with your email address</li>
+      <li><strong>GitHub OAuth</strong> — Sign in with your GitHub account</li>
+      <li><strong>Discord OAuth</strong> — Sign in with your Discord account</li>
     </ul>
 
-    <!-- API Key -->
-    <h2 id="api-key">获取 API Key</h2>
-    <p>登录 Got API 后，进入控制台 → API Keys 页面：</p>
+    <h2 id="api-key">Get API Key</h2>
+    <p>After logging in, navigate to your dashboard and go to <strong>API Keys</strong>:</p>
     <ol>
-      <li>点击「创建令牌」</li>
-      <li>设置令牌名称（如 "开发环境"）</li>
-      <li>配置权限：可选择允许访问的模型范围</li>
-      <li>设置配额限制（可选）</li>
-      <li>IP 白名单（可选，提升安全性）</li>
-      <li>创建后立即复制令牌值（关闭后不再显示）</li>
+      <li>Click <strong>"Create Token"</strong></li>
+      <li>Give it a name (e.g., "Development")</li>
+      <li>Optionally restrict which models the token can access</li>
+      <li>Set a usage quota limit (optional)</li>
+      <li>Add IP whitelist for extra security (optional)</li>
+      <li>Copy the token immediately — it will not be shown again</li>
     </ol>
 
-    <!-- API Usage -->
-    <h2 id="api-usage">使用 API</h2>
-    <h3>支持的接口端点</h3>
-    <p>Got API 兼容 OpenAI 标准接口，同时支持 Claude、Gemini 等多种格式：</p>
+    <h2 id="api-usage">Using the API</h2>
+    <h3>Supported Endpoints</h3>
+    <p>Got API is compatible with the OpenAI standard. It also supports Claude, Gemini and other model formats:</p>
     <ul>
-      <li><code>POST /v1/chat/completions</code> — 聊天补全</li>
-      <li><code>POST /v1/images/generations</code> — 图像生成（若渠道支持）</li>
-      <li><code>GET /v1/models</code> — 获取可用模型列表</li>
+      <li><code>POST /v1/chat/completions</code> — Chat completions</li>
+      <li><code>POST /v1/images/generations</code> — Image generation (when the upstream channel supports it)</li>
+      <li><code>GET /v1/models</code> — List available models</li>
+    </ul>
+    <p>Use the model name shown in the <strong>Model Square</strong> on the website. All models are accessed through one unified endpoint — no need to switch base URLs.</p>
+
+    <h2 id="token">Token Management</h2>
+    <p>Each token is an independent credential with its own settings:</p>
+    <ul>
+      <li><strong>Quota limit</strong> — Cap total usage per token</li>
+      <li><strong>Model restriction</strong> — Only allow access to specified models</li>
+      <li><strong>IP whitelist</strong> — Restrict usage to trusted IPs</li>
+      <li><strong>Auto-expiry</strong> — Set a validity period</li>
     </ul>
 
-    <h3>模型名称映射</h3>
-    <p>使用模型广场展示的模型名称。支持多种大模型的统一接口调用，无需切换 API 地址。</p>
+    <h2 id="models">Models &amp; Pricing</h2>
+    <p>Browse the <strong>Model Square</strong> for a full list of available models and their real-time pricing. Got API supports 100+ models with billing routing across major AI providers.</p>
+    <p>Pricing is per-token. User groups can have custom pricing multipliers for differentiated billing.</p>
 
-    <!-- Token -->
-    <h2 id="token">令牌管理</h2>
-    <p>令牌是 API 调用的身份凭证，每个令牌可以独立配置：</p>
-    <ul>
-      <li><strong>配额限制</strong> — 限制该令牌的最大使用额度</li>
-      <li><strong>模型限制</strong> — 仅允许访问指定的模型</li>
-      <li><strong>IP 白名单</strong> — 限制只有特定 IP 可使用该令牌</li>
-      <li><strong>自动过期</strong> — 设置令牌有效期</li>
-    </ul>
-
-    <!-- Models -->
-    <h2 id="models">模型与定价</h2>
-    <p>前往「模型广场」查看完整的模型列表和实时定价。Got API 支持 100+ 模型的计费路由，覆盖主流 AI 服务商。</p>
-    <p>模型按 Token 计费，支持分组差异化定价。不同的用户分组可配置不同的费率倍率。</p>
-
-    <!-- Apps -->
-    <h2 id="apps">客户端集成</h2>
-    <p>Got API 支持一键配置导入到以下 AI 客户端应用：</p>
+    <h2 id="apps">Client Integration</h2>
+    <p>Got API supports one-click configuration import for these popular AI clients:</p>
     <div class="grid-2">
       <div class="card">
         <h4>🍒 Cherry Studio</h4>
-        <p>一键导入配置，支持多协议适配</p>
+        <p>One-click config import, multi-protocol support</p>
       </div>
       <div class="card">
         <h4>💬 Lobe Chat</h4>
-        <p>官方示例配置，支持自定义 API 地址</p>
+        <p>Official example config, custom API address support</p>
       </div>
       <div class="card">
         <h4>🐱 OpenCat</h4>
-        <p>Team 模式快速接入</p>
+        <p>Quick setup in Team mode</p>
       </div>
       <div class="card">
         <h4>🎯 DeepChat</h4>
-        <p>Provider 安装配置</p>
+        <p>Provider installation configuration</p>
       </div>
       <div class="card">
         <h4>🤖 AI as Workspace</h4>
-        <p>Provider 配置集成</p>
+        <p>Provider config integration</p>
       </div>
       <div class="card">
-        <h4>🌐 更多...</h4>
-        <p>支持 CC Switch、流畅阅读等应用</p>
+        <h4>🌐 More</h4>
+        <p>CC Switch, FluentRead, AionUI, and more</p>
       </div>
     </div>
 
-    <!-- Logs -->
-    <h2 id="logs">使用记录</h2>
-    <p>在「使用日志」页面可以查看：</p>
+    <h2 id="logs">Usage Logs</h2>
+    <p>In the <strong>Usage Logs</strong> page you can:</p>
     <ul>
-      <li>每次 API 调用的详细记录（模型、Token 消耗、耗时）</li>
-      <li>按时间、模型、令牌等维度筛选</li>
-      <li>用量统计图表</li>
-      <li>数据导出功能</li>
+      <li>View detailed records of every API call (model, tokens, duration)</li>
+      <li>Filter by date, model, or token</li>
+      <li>Visualize usage statistics with charts</li>
+      <li>Export your data</li>
     </ul>
 
-    <!-- Topup -->
-    <h2 id="topup">充值与管理</h2>
-    <p>Got API 支持多种充值方式：</p>
+    <h2 id="topup">Billing &amp; Top-Up</h2>
+    <p>Got API supports multiple ways to add credit to your account:</p>
     <ul>
-      <li><strong>在线充值</strong> — 支持 Stripe 美元支付</li>
-      <li><strong>兑换码</strong> — 输入兑换码充值额度</li>
-      <li><strong>订阅套餐</strong> — 按周期购买套餐，适合稳定用量用户</li>
+      <li><strong>Online Payment</strong> — Pay via Stripe (USD)</li>
+      <li><strong>Redemption Code</strong> — Enter a code to add credit instantly</li>
+      <li><strong>Subscription Plans</strong> — Monthly or yearly plans for consistent usage</li>
     </ul>
-    <p>在「钱包」页面可查看余额、充值记录和额度消耗明细。</p>
+    <p>Visit the <strong>Wallet</strong> page to check your balance, view top-up history, and monitor usage.</p>
 
-    <!-- Integrations -->
-    <h2 id="integrations">生态整合</h2>
-    <p>Got API 提供广泛的生态支持：</p>
+    <h2 id="integrations">Ecosystem</h2>
+    <p>Got API connects to a broad ecosystem of AI providers and client applications:</p>
     <div class="card">
-      <h4>📊 平台能力</h4>
+      <h4>📊 Platform Scale</h4>
       <p>
-        <span class="tag tag-blue">50+ 上游服务适配</span>
-        <span class="tag tag-green">100+ 模型计费支持</span>
-        <span class="tag tag-purple">50+ 兼容 API 路由</span>
-        <span class="tag tag-orange">10+ 调度控制能力</span>
+        <span class="tag tag-blue">50+ Upstream Providers</span>
+        <span class="tag tag-green">100+ Models Billed</span>
+        <span class="tag tag-purple">50+ Compatible Routes</span>
+        <span class="tag tag-orange">10+ Scheduling Capabilities</span>
       </p>
     </div>
     <div class="card">
-      <h4>🔌 已集成的客户端</h4>
+      <h4>🔌 Supported Clients</h4>
       <p>
         <span class="tag tag-blue">Cherry Studio</span>
         <span class="tag tag-green">Lobe Chat</span>
         <span class="tag tag-purple">OpenCat</span>
         <span class="tag tag-orange">DeepChat</span>
         <span class="tag tag-blue">AI as Workspace</span>
-        <span class="tag tag-green">AMA 问天</span>
+        <span class="tag tag-green">AMA</span>
         <span class="tag tag-purple">CC Switch</span>
-        <span class="tag tag-orange">流畅阅读</span>
+        <span class="tag tag-orange">FluentRead</span>
         <span class="tag tag-blue">AionUI</span>
       </p>
     </div>
 
-    <!-- Security -->
-    <h2 id="security">安全与合规</h2>
-    <p>Got API 基于 New API 平台构建，提供多层次安全防护：</p>
+    <h2 id="security">Security &amp; Compliance</h2>
+    <p>Got API is built on the New API platform and provides multiple layers of security:</p>
     <ul>
-      <li><strong>HTTPS 加密</strong> — 所有 API 通信通过 Cloudflare 全球网络加密传输</li>
-      <li><strong>API Key 认证</strong> — 每个请求需携带有效令牌</li>
-      <li><strong>令牌权限控制</strong> — 支持模型限制、配额限制、IP 白名单</li>
-      <li><strong>用户角色体系</strong> — Root / Admin / User 三级权限管理</li>
-      <li><strong>双因素认证 (2FA)</strong> — 支持 TOTP 两步验证</li>
-      <li><strong>OAuth 认证</strong> — 支持 GitHub、Discord 第三方登录</li>
-      <li><strong>数据导出</strong> — 用户可主动导出使用数据</li>
+      <li><strong>HTTPS Encryption</strong> — All traffic encrypted via Cloudflare's global network</li>
+      <li><strong>API Key Authentication</strong> — Every request requires a valid token</li>
+      <li><strong>Token Access Control</strong> — Model restrictions, quota limits, IP whitelist</li>
+      <li><strong>Role-Based Access</strong> — Root / Admin / User permission levels</li>
+      <li><strong>Two-Factor Auth (2FA)</strong> — TOTP-based two-step verification</li>
+      <li><strong>OAuth Single Sign-On</strong> — GitHub and Discord login</li>
+      <li><strong>Data Export</strong> — Users can export their usage data</li>
     </ul>
 
-    <!-- FAQ -->
-    <h2 id="faq">常见问题 (FAQ)</h2>
+    <h2 id="faq">Frequently Asked Questions</h2>
 
-    <div class="faq-item">
-      <h4>Got API 的定价方式是怎样的？</h4>
-      <p>Got API 按 Token 用量计费，各模型定价以「模型广场」页面实时展示为准。平台支持用户分组和倍率配置，管理员可针对不同用户组设置差异化费率。如您有企业定制需求，请联系 support@gotapi.ai。</p>
-    </div>
-
-    <div class="faq-item">
-      <h4>我的 API 请求数据是否安全？</h4>
-      <p>所有 API 通信均通过 HTTPS 加密传输。API 令牌支持设置 IP 白名单和模型访问限制，有效防止未授权使用。您可以在控制台随时管理和撤销令牌。</p>
-    </div>
-
-    <div class="faq-item">
-      <h4>支持哪些 AI 模型？</h4>
-      <p>Got API 聚合了数十家 AI 服务商的 100+ 模型，包括 OpenAI、Anthropic (Claude)、Google (Gemini)、Meta (Llama) 以及多款国产大模型。具体列表请查看「模型广场」。</p>
-    </div>
-
-    <div class="faq-item">
-      <h4>数据会存储在哪些区域？</h4>
-      <p>Got API 总部位于香港，服务器部署在海外节点。API 请求经由我们的路由基础设施进行优化转发，不持久化存储您的对话内容。</p>
-    </div>
-
-    <div class="faq-item">
-      <h4>SLA 服务等级是怎样的？</h4>
-      <p>Got API 通过 Cloudflare 全球网络提供加速服务，内建多节点负载均衡和自动故障切换。具体 SLA 承诺请联系我们的销售团队了解企业方案。</p>
-    </div>
-
-    <div class="faq-item">
-      <h4>如何使用兑换码充值？</h4>
-      <p>登录后进入「钱包」页面，在兑换码输入框中输入您的兑换码即可。兑换码充值额度会实时到账。</p>
-    </div>
-
-    <div class="faq-item">
-      <h4>如何将 Got API 接入到我的应用中？</h4>
-      <p>只需将您的应用中的 API Base URL 改为 <code>https://gotapi.ai/v1</code>，API Key 改为您在 Got API 创建的令牌，即可使用 OpenAI 兼容 SDK 直接接入。</p>
-    </div>
-
-    <div class="faq-item">
-      <h4>支持流式输出 (Stream) 吗？</h4>
-      <p>支持。Got API 兼容 SSE (Server-Sent Events) 流式输出，只需在请求中添加 <code>stream: true</code> 参数即可。</p>
-    </div>
-
-    <div class="faq-item">
-      <h4>我遇到了技术问题，如何获得帮助？</h4>
-      <p>可通过邮件 <a href="mailto:support@gotapi.ai">support@gotapi.ai</a> 联系我们。常见操作问题可在「使用日志」中查看调用详情，或参考本文档各章节指南。</p>
-    </div>
+    <div class="faq-item"><h4>How is pricing calculated?</h4><p>Got API charges per-token based on each model's rate. Real-time pricing is shown on the Model Square page. Custom pricing tiers are available for enterprise customers. Contact support@gotapi.ai for details.</p></div>
+    <div class="faq-item"><h4>Is my data secure?</h4><p>All API traffic is encrypted via HTTPS. Tokens support IP whitelisting and model-level access control. You can manage and revoke tokens at any time from your dashboard.</p></div>
+    <div class="faq-item"><h4>Which AI models are supported?</h4><p>Got API aggregates 100+ models from dozens of providers including OpenAI, Anthropic (Claude), Google (Gemini), Meta (Llama), DeepSeek, and many more. See the Model Square for the full list.</p></div>
+    <div class="faq-item"><h4>Where is data stored?</h4><p>Got API is headquartered in Hong Kong. Our servers are deployed in global data centers. We do not persistently store your conversation content — requests are routed and forwarded in real time.</p></div>
+    <div class="faq-item"><h4>What SLA do you offer?</h4><p>We use Cloudflare's global network for acceleration, with multi-node load balancing and automatic failover. Contact our sales team for enterprise SLA details.</p></div>
+    <div class="faq-item"><h4>How do I use a redemption code?</h4><p>Log in, go to the Wallet page, and enter your code in the redemption field. Credits are applied instantly.</p></div>
+    <div class="faq-item"><h4>How do I integrate Got API into my app?</h4><p>Simply set your API base URL to <code>https://gotapi.ai/v1</code> and use your Got API token as the API key. Any OpenAI-compatible SDK will work.</p></div>
+    <div class="faq-item"><h4>Does Got API support streaming?</h4><p>Yes, SSE (Server-Sent Events) streaming is fully supported. Add <code>"stream": true</code> to your request body.</p></div>
+    <div class="faq-item"><h4>I need help — how do I get support?</h4><p>Email us at <a href="mailto:support@gotapi.ai">support@gotapi.ai</a>. For self-service, check the Usage Logs for detailed call information and refer to this documentation.</p></div>
 
     <div class="footer">
-      <p>© 2026 Gotop Technologies Limited. All rights reserved.</p>
+      <p>&copy; 2026 Gotop Technologies Limited. All rights reserved.</p>
+      <p style="margin-top:4px;">Room S011, 2/F, The Capital, 61-65 Chatham Road South, Tsim Sha Tsui, Hong Kong</p>
+    </div>
+
+    </div><!-- /en -->
+
+    <!-- ===== CHINESE ===== -->
+    <div data-lang="zh" style="display:none">
+
+    <h1>Got API 文档</h1>
+    <p style="font-size:16px;color:var(--muted);margin-bottom:32px;">统一 API 网关，服务于海量 AI 模型。通过标准 OpenAI 兼容接口，一个地址访问数十种模型。</p>
+
+    <h2 id="quickstart">快速入门</h2>
+    <p>Got API 提供与 OpenAI API 完全兼容的接口，您可以使用标准工具直接调用。</p>
+    <h3>1. API 地址</h3>
+    <pre><code>https://gotapi.ai/v1</code></pre>
+    <h3>2. cURL 调用</h3>
+    <pre><code>curl https://gotapi.ai/v1/chat/completions \
+  -H "Authorization: Bearer sk-你的令牌" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gpt-4o",
+    "messages": [{"role": "user", "content": "Hello!"}]
+  }'</code></pre>
+    <h3>3. Python 示例</h3>
+    <pre><code>from openai import OpenAI
+
+client = OpenAI(base_url="https://gotapi.ai/v1", api_key="sk-你的令牌")
+response = client.chat.completions.create(
+    model="gpt-4o",
+    messages=[{"role": "user", "content": "Hello!"}]
+)
+print(response.choices[0].message.content)</code></pre>
+
+    <h2 id="register">注册与登录</h2>
+    <p>支持邮箱注册、GitHub OAuth、Discord OAuth 三种方式。</p>
+
+    <h2 id="api-key">获取 API Key</h2>
+    <ol>
+      <li>登录后进入控制台 → API Keys</li>
+      <li>点击「创建令牌」</li>
+      <li>设置名称，可选配额限制、模型限制、IP 白名单</li>
+      <li>创建后立即复制令牌值</li>
+    </ol>
+
+    <h2 id="api-usage">使用 API</h2>
+    <p>支持 <code>POST /v1/chat/completions</code>、<code>GET /v1/models</code> 等标准端点。使用模型广场展示的模型名称。</p>
+
+    <h2 id="token">令牌管理</h2>
+    <p>支持配额限制、模型限制、IP 白名单、自动过期等功能。</p>
+
+    <h2 id="models">模型与定价</h2>
+    <p>前往「模型广场」查看完整模型列表和实时定价。支持 100+ 模型计费路由。</p>
+
+    <h2 id="apps">客户端集成</h2>
+    <p>支持 Cherry Studio / Lobe Chat / OpenCat / DeepChat / AI as Workspace / CC Switch 等客户端一键配置导入。</p>
+
+    <h2 id="logs">使用记录</h2>
+    <p>查看每次 API 调用的详细记录，支持筛选、统计图表、数据导出。</p>
+
+    <h2 id="topup">充值与管理</h2>
+    <p>支持 Stripe 在线充值、兑换码充值、订阅套餐。在「钱包」页面管理余额。</p>
+
+    <h2 id="integrations">生态整合</h2>
+    <p><span class="tag tag-blue">50+ 上游服务</span><span class="tag tag-green">100+ 模型计费</span><span class="tag tag-purple">50+ 路由</span><span class="tag tag-orange">10+ 调度能力</span></p>
+
+    <h2 id="security">安全与合规</h2>
+    <p>HTTPS 加密 / API Key 认证 / 角色权限 / 2FA / OAuth / 数据导出</p>
+
+    <h2 id="faq">常见问题</h2>
+    <div class="faq-item"><h4>定价方式是怎样的？</h4><p>按 Token 用量计费，各模型定价以「模型广场」实时展示为准。</p></div>
+    <div class="faq-item"><h4>数据是否安全？</h4><p>所有通信 HTTPS 加密，令牌支持 IP 白名单和模型限制。</p></div>
+    <div class="faq-item"><h4>支持哪些模型？</h4><p>100+ 模型，涵盖 OpenAI、Claude、Gemini、Llama、DeepSeek 等。</p></div>
+    <div class="faq-item"><h4>数据存储在哪？</h4><p>服务器部署在全球数据中心，不持久化存储对话内容。</p></div>
+    <div class="faq-item"><h4>SLA 是怎样的？</h4><p>通过 Cloudflare 全球网络加速，多节点负载均衡和自动故障切换。</p></div>
+    <div class="faq-item"><h4>如何获得帮助？</h4><p><a href="mailto:support@gotapi.ai">support@gotapi.ai</a></p></div>
+
+    <div class="footer">
+      <p>© 2026 Gotop Technologies Limited. 保留所有权利。</p>
       <p style="margin-top:4px;">香港尖沙咀漆咸道南61-65號首都廣場2樓S011室</p>
     </div>
+
+    </div><!-- /zh -->
 
   </main>
 </div>
 
+<script>
+// ---- Language detection & switching ----
+let currentLang = localStorage.getItem('gotapi_lang') || 'en';
+
+// Auto-detect browser language (only on first visit)
+if (!localStorage.getItem('gotapi_lang')) {
+  const navLang = (navigator.language || '').toLowerCase();
+  if (navLang.startsWith('zh')) currentLang = 'zh';
+  else currentLang = 'en';
+  localStorage.setItem('gotapi_lang', currentLang);
+}
+
+function applyLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('gotapi_lang', lang);
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    el.style.display = (el.getAttribute('data-lang') === lang) ? 'block' : 'none';
+  });
+  document.documentElement.lang = lang;
+  document.getElementById('langToggle').textContent = lang === 'en' ? '中' : 'EN';
+}
+applyLang(currentLang);
+
+function toggleLang() {
+  applyLang(currentLang === 'en' ? 'zh' : 'en');
+}
+
+// ---- Sidebar scroll spy ----
+const sections = document.querySelectorAll('h2[id]');
+const sidebarLinks = document.querySelectorAll('.sidebar a[href^="#"]');
+
+function updateActiveLink() {
+  let currentId = '';
+  sections.forEach(section => {
+    const rect = section.getBoundingClientRect();
+    if (rect.top <= 120) currentId = section.id;
+  });
+  sidebarLinks.forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === '#' + currentId);
+  });
+}
+
+window.addEventListener('scroll', updateActiveLink);
+window.addEventListener('load', () => setTimeout(updateActiveLink, 100));
+
+// Smooth scroll on sidebar click
+sidebarLinks.forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const id = link.getAttribute('href').substring(1);
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    history.replaceState(null, '', '#' + id);
+  });
+});
+</script>
 </body>
 </html>
