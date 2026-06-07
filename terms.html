@@ -1,55 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-active-lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Terms of Service | Got API</title>
 <style>
-:root{--bg:#fff;--fg:#1a1a2e;--muted:#6b7280;--border:#e5e7eb;--accent:#667eea;--accent2:#764ba2}
+:root{--bg:#fff;--fg:#1a1a2e;--muted:#6b7280;--border:#e5e7eb;--accent:#667eea;--accent2:#764ba2;--hero-from:#2b3a8c;--hero-via:#6b3fa0;--hero-to:#c53b6e}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;color:var(--fg);background:var(--bg);line-height:1.8}
-.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:0 24px}
+.hero{background:linear-gradient(135deg,var(--hero-from) 0%,var(--hero-via) 50%,var(--hero-to) 100%);padding:40px 24px 36px;text-align:center;color:#fff}
+.hero h1{font-size:2rem;font-weight:800;letter-spacing:-.02em;margin-bottom:6px}
+.hero p{font-size:.95rem;opacity:.85}
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px}
 .nav-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;height:56px;gap:24px}
 .nav-logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:16px;text-decoration:none;color:var(--fg)}
 .nav-logo img{width:24px;height:24px;border-radius:6px}
 .nav-links{display:flex;gap:16px;margin-left:auto;align-items:center}
-.nav-links a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:500}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:500;transition:color .2s}
 .nav-links a:hover{color:var(--fg)}
-.lang-btn{background:none;border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:13px;cursor:pointer;color:var(--muted);transition:all .15s}
+.lang-btn{background:none;border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:13px;cursor:pointer;color:var(--muted);transition:all .15s;user-select:none}
 .lang-btn:hover{border-color:var(--accent);color:var(--accent)}
-.container{max-width:900px;margin:0 auto;padding:48px 24px 80px}
-h1{font-size:2rem;font-weight:800;margin:0 0 4px;letter-spacing:-.02em}
-.sub{color:var(--muted);font-size:14px;margin-bottom:40px}
+.container{max-width:900px;margin:0 auto;padding:40px 24px 80px}
 h2{font-size:1.3rem;font-weight:700;margin:32px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border)}
 h3{font-size:1.05rem;font-weight:600;margin:20px 0 8px}
 p{margin:0 0 14px;color:#374151;font-size:15px}
 ul{margin:0 0 14px;padding-left:20px;color:#374151;font-size:15px}
 li{margin-bottom:6px}
 strong{color:var(--fg)}
+.sub{color:var(--muted);font-size:14px;margin-bottom:32px}
 .footer{text-align:center;padding:32px 0;color:var(--muted);font-size:13px;border-top:1px solid var(--border);margin-top:48px}
-[data-lang]{display:none}
-[data-lang="en"]{display:block}
+.footer a{color:var(--accent);text-decoration:none}
+html[data-active-lang="en"] [data-lang]:not([data-lang="en"]){display:none!important}
+html[data-active-lang="zh"] [data-lang]:not([data-lang="zh"]){display:none!important}
+@media(max-width:768px){.container{padding:24px 16px 60px}.hero h1{font-size:1.4rem}}
 </style>
 </head>
 <body>
+<section class="hero">
+  <h1 data-lang="en">Terms of Service</h1>
+  <h1 data-lang="zh">服务条款</h1>
+  <p data-lang="en" class="sub" style="color:rgba(255,255,255,.7);margin-bottom:0">Last Updated: June 7, 2026</p>
+  <p data-lang="zh" class="sub" style="color:rgba(255,255,255,.7);margin-bottom:0">最后更新：2026 年 6 月 7 日</p>
+</section>
 <nav class="nav">
-<div class="nav-inner">
-<a class="nav-logo" href="https://gotapi.ai"><img src="https://gotapi.ai/logo.png" alt=""> Got API</a>
-<div class="nav-links">
-<a href="https://gotapi.ai">Home</a>
-<a href="/privacy.html">Privacy</a>
-<button class="lang-btn" id="langToggle" onclick="toggleLang()">中</button>
-</div>
-</div>
+  <div class="nav-inner">
+    <a class="nav-logo" href="https://gotapi.ai/dashboard/overview"><img src="https://gotapi.ai/logo.png" alt=""> Got API</a>
+    <div class="nav-links">
+      <a href="https://gotapi.ai/dashboard/overview" data-lang="en">Home</a>
+      <a href="https://gotapi.ai/dashboard/overview" data-lang="zh">首页</a>
+      <a href="/docs/" data-lang="en">Docs</a>
+      <a href="/docs/" data-lang="zh">文档</a>
+      <a href="/privacy.html">Privacy</a>
+      <button class="lang-btn" id="langToggle" onclick="toggleLang()">中</button>
+    </div>
+  </div>
 </nav>
 <div class="container">
-
 <div data-lang="en">
-<h1>Terms of Service</h1>
-<p class="sub">Last Updated: June 7, 2026</p>
 <p><strong>Gotop Technologies Limited</strong> ("Company") operates <strong>gotapi.ai</strong> (the "Site") and provides cloud API gateway services (the "Services"). By using our Services, you agree to these Terms.</p>
 <h2>1. Services Description</h2>
-<p>We provide a cloud-based API gateway infrastructure enabling developers and enterprises to access AI models and cloud APIs through a unified routing layer, including request routing, load balancing, caching, and performance optimization.</p>
+<p>We provide a cloud-based API gateway infrastructure enabling developers and enterprises to access AI models and cloud APIs through a unified routing layer.</p>
 <h2>2. Account Registration</h2>
 <p>2.1 You must create an account. You are responsible for your credentials and API keys.</p>
 <p>2.2 You must provide accurate information during registration.</p>
@@ -73,7 +83,7 @@ strong{color:var(--fg)}
 <p>You agree to comply with all applicable Hong Kong laws and implement security measures to prevent unauthorized account use.</p>
 <h2>5. Service Limitations</h2>
 <p>Services provided "as is." We may impose rate limits and modify services with reasonable notice.</p>
-<h2>6. Payment &amp; Fees</h2>
+<h2>6. Payment & Fees</h2>
 <p>Fees are set on the Pricing page. Fees are non-refundable except per our Refund Policy. We may change fees with 30 days' notice.</p>
 <h2>7. Refund Policy</h2>
 <p>7.1 Unused prepaid credits may be refunded within 14 days (processing fee applies).</p>
@@ -87,15 +97,12 @@ strong{color:var(--fg)}
 <p>These Terms are governed by the laws of Hong Kong SAR.</p>
 <h2>11. Contact</h2>
 <p>Gotop Technologies Limited<br>Room S011, 2/F, The Capital, 61-65 Chatham Road South, Tsim Sha Tsui, Hong Kong<br>Email: legal@gotapi.ai</p>
-<div class="footer"><p>&copy; 2026 Gotop Technologies Limited.</p></div>
+<div class="footer"><p>&copy; 2026 Gotop Technologies Limited. · <a href="/docs/">Docs</a></p></div>
 </div>
-
-<div data-lang="zh" style="display:none">
-<h1>服务条款</h1>
-<p class="sub">最后更新：2026 年 6 月 7 日</p>
+<div data-lang="zh">
 <p><strong>Gotop Technologies Limited（云珩拓科技有限公司）</strong>运营 <strong>gotapi.ai</strong> 网站及云 API 网关服务。使用本服务即表示您同意以下条款。</p>
 <h2>1. 服务描述</h2>
-<p>我们提供基于云的 API 网关基础设施，使开发者和企业能够通过统一的路由层访问 AI 模型和云 API，包括请求路由、负载均衡、缓存和性能优化。</p>
+<p>我们提供基于云的 API 网关基础设施，使开发者和企业能够通过统一的路由层访问 AI 模型和云 API。</p>
 <h2>2. 账户注册</h2>
 <p>2.1 您需要创建账户才能使用服务，对账户凭证和 API Key 的安全负责。</p>
 <p>2.2 注册时需提供准确信息并保持更新。</p>
@@ -133,17 +140,23 @@ strong{color:var(--fg)}
 <p>本条款受香港特别行政区法律管辖。</p>
 <h2>11. 联系方式</h2>
 <p>Gotop Technologies Limited（云珩拓科技有限公司）<br>香港尖沙咀漆咸道南61-65號首都廣場2樓S011室<br>邮箱：legal@gotapi.ai</p>
-<div class="footer"><p>&copy; 2026 Gotop Technologies Limited. 保留所有权利。</p></div>
+<div class="footer"><p>&copy; 2026 Gotop Technologies Limited. 保留所有权利。· <a href="/docs/">文档</a></p></div>
 </div>
-
 </div>
 <script>
 (function(){
-var l='en',p=new URLSearchParams(location.search),u=p.get('lang');
-if(u==='en'||u==='zh')l=u;else if(localStorage.getItem('gotapi_l'))l=localStorage.getItem('gotapi_l');else l=(navigator.language||'').startsWith('zh')?'zh':'en';
-function applyLang(v){l=v;localStorage.setItem('gotapi_l',v);document.querySelectorAll('[data-lang]').forEach(function(e){e.style.display=e.getAttribute('data-lang')===v?'block':'none'});document.documentElement.lang=v;var b=document.getElementById('langToggle');if(b)b.textContent=v==='en'?'中':'EN'}
-window.toggleLang=function(){applyLang(l==='en'?'zh':'en')};
-applyLang(l);
+  'use strict';
+  var L='en',p=new URLSearchParams(location.search),u=p.get('lang');
+  if(u==='en'||u==='zh')L=u;else if(localStorage.getItem('gotapi_l'))L=localStorage.getItem('gotapi_l');else L=(navigator.language||'').startsWith('zh')?'zh':'en';
+  function applyLang(v){
+    L=v;localStorage.setItem('gotapi_l',v);
+    document.documentElement.setAttribute('data-active-lang',v);
+    document.documentElement.lang=v;
+    var b=document.getElementById('langToggle');
+    if(b)b.textContent=v==='en'?'中':'EN';
+  }
+  window.toggleLang=function(){applyLang(L==='en'?'zh':'en')};
+  applyLang(L);
 })();
 </script>
 </body>

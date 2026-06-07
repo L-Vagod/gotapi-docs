@@ -1,52 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-active-lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy | Got API</title>
 <style>
-:root{--bg:#fff;--fg:#1a1a2e;--muted:#6b7280;--border:#e5e7eb;--accent:#667eea;--accent2:#764ba2}
+:root{--bg:#fff;--fg:#1a1a2e;--muted:#6b7280;--border:#e5e7eb;--accent:#667eea;--accent2:#764ba2;--hero-from:#2b3a8c;--hero-via:#6b3fa0;--hero-to:#c53b6e}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;color:var(--fg);background:var(--bg);line-height:1.8}
-.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:0 24px}
+.hero{background:linear-gradient(135deg,var(--hero-from) 0%,var(--hero-via) 50%,var(--hero-to) 100%);padding:40px 24px 36px;text-align:center;color:#fff}
+.hero h1{font-size:2rem;font-weight:800;letter-spacing:-.02em;margin-bottom:6px}
+.hero p{font-size:.95rem;opacity:.85}
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px}
 .nav-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;height:56px;gap:24px}
 .nav-logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:16px;text-decoration:none;color:var(--fg)}
 .nav-logo img{width:24px;height:24px;border-radius:6px}
 .nav-links{display:flex;gap:16px;margin-left:auto;align-items:center}
-.nav-links a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:500}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:500;transition:color .2s}
 .nav-links a:hover{color:var(--fg)}
-.lang-btn{background:none;border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:13px;cursor:pointer;color:var(--muted);transition:all .15s}
+.lang-btn{background:none;border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:13px;cursor:pointer;color:var(--muted);transition:all .15s;user-select:none}
 .lang-btn:hover{border-color:var(--accent);color:var(--accent)}
-.container{max-width:900px;margin:0 auto;padding:48px 24px 80px}
-h1{font-size:2rem;font-weight:800;margin:0 0 4px;letter-spacing:-.02em}
-.sub{color:var(--muted);font-size:14px;margin-bottom:40px}
+.container{max-width:900px;margin:0 auto;padding:40px 24px 80px}
 h2{font-size:1.3rem;font-weight:700;margin:32px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border)}
 h3{font-size:1.05rem;font-weight:600;margin:20px 0 8px}
 p{margin:0 0 14px;color:#374151;font-size:15px}
 ul{margin:0 0 14px;padding-left:20px;color:#374151;font-size:15px}
 li{margin-bottom:6px}
 strong{color:var(--fg)}
+.sub{color:var(--muted);font-size:14px;margin-bottom:32px}
 .footer{text-align:center;padding:32px 0;color:var(--muted);font-size:13px;border-top:1px solid var(--border);margin-top:48px}
-[data-lang]{display:none}
-[data-lang="en"]{display:block}
+.footer a{color:var(--accent);text-decoration:none}
+html[data-active-lang="en"] [data-lang]:not([data-lang="en"]){display:none!important}
+html[data-active-lang="zh"] [data-lang]:not([data-lang="zh"]){display:none!important}
+@media(max-width:768px){.container{padding:24px 16px 60px}.hero h1{font-size:1.4rem}}
 </style>
 </head>
 <body>
+<section class="hero">
+  <h1 data-lang="en">Privacy Policy</h1>
+  <h1 data-lang="zh">隐私政策</h1>
+  <p data-lang="en" class="sub" style="color:rgba(255,255,255,.7);margin-bottom:0">Last Updated: June 7, 2026</p>
+  <p data-lang="zh" class="sub" style="color:rgba(255,255,255,.7);margin-bottom:0">最后更新：2026 年 6 月 7 日</p>
+</section>
 <nav class="nav">
-<div class="nav-inner">
-<a class="nav-logo" href="https://gotapi.ai"><img src="https://gotapi.ai/logo.png" alt=""> Got API</a>
-<div class="nav-links">
-<a href="https://gotapi.ai">Home</a>
-<a href="/terms.html">Terms</a>
-<button class="lang-btn" id="langToggle" onclick="toggleLang()">中</button>
-</div>
-</div>
+  <div class="nav-inner">
+    <a class="nav-logo" href="https://gotapi.ai/dashboard/overview"><img src="https://gotapi.ai/logo.png" alt=""> Got API</a>
+    <div class="nav-links">
+      <a href="https://gotapi.ai/dashboard/overview" data-lang="en">Home</a>
+      <a href="https://gotapi.ai/dashboard/overview" data-lang="zh">首页</a>
+      <a href="/docs/" data-lang="en">Docs</a>
+      <a href="/docs/" data-lang="zh">文档</a>
+      <a href="/terms.html">Terms</a>
+      <button class="lang-btn" id="langToggle" onclick="toggleLang()">中</button>
+    </div>
+  </div>
 </nav>
 <div class="container">
-
 <div data-lang="en">
-<h1>Privacy Policy</h1>
-<p class="sub">Last Updated: June 7, 2026</p>
 <p><strong>Gotop Technologies Limited</strong> ("we") is committed to protecting your privacy. This policy explains how we collect, use, and safeguard your information when you use gotapi.ai and our API gateway services.</p>
 <h2>1. Information We Collect</h2>
 <p><strong>Account Information:</strong> Name, email, company name (if applicable), and billing information (processed by Stripe — we do not store card details).</p>
@@ -57,7 +67,7 @@ strong{color:var(--fg)}
 <p>Providing services, improving performance, security/fraud prevention, communication (updates, billing), and legal compliance.</p>
 <h2>3. Data We Do NOT Collect</h2>
 <p>We do NOT collect: your end users' personal data, content of API requests beyond routing needs, sensitive personal information, or payment card details.</p>
-<h2>4. Data Storage &amp; Transfer</h2>
+<h2>4. Data Storage & Transfer</h2>
 <p><strong>Location:</strong> United States (New York, DigitalOcean).</p>
 <p><strong>Retention:</strong> Account data: account duration + 90 days. Usage logs: up to 12 months. Billing records: 7 years (HK law).</p>
 <p><strong>International Transfers:</strong> Data may be processed in the US with appropriate safeguards.</p>
@@ -73,12 +83,9 @@ strong{color:var(--fg)}
 <p>Essential cookies for site functionality. Analytics cookies (opt-in). No advertising or tracking cookies.</p>
 <h2>10. Contact</h2>
 <p>Gotop Technologies Limited<br>Room S011, 2/F, The Capital, 61-65 Chatham Road South, Tsim Sha Tsui, Hong Kong<br>Email: privacy@gotapi.ai</p>
-<div class="footer"><p>&copy; 2026 Gotop Technologies Limited.</p></div>
+<div class="footer"><p>&copy; 2026 Gotop Technologies Limited. · <a href="/docs/">Docs</a></p></div>
 </div>
-
-<div data-lang="zh" style="display:none">
-<h1>隐私政策</h1>
-<p class="sub">最后更新：2026 年 6 月 7 日</p>
+<div data-lang="zh">
 <p><strong>Gotop Technologies Limited（云珩拓科技有限公司）</strong>致力于保护您的隐私。本政策说明我们在您使用 gotapi.ai 及 API 网关服务时如何收集、使用和保护您的信息。</p>
 <h2>1. 我们收集的信息</h2>
 <p><strong>账户信息：</strong>姓名、邮箱、公司名称（如适用）、账单信息（由 Stripe 处理，我们不存储银行卡信息）。</p>
@@ -105,17 +112,23 @@ strong{color:var(--fg)}
 <p>必要的 Cookie 用于网站功能。分析 Cookie（需选择加入）。无广告或追踪 Cookie。</p>
 <h2>10. 联系方式</h2>
 <p>Gotop Technologies Limited（云珩拓科技有限公司）<br>香港尖沙咀漆咸道南61-65號首都廣場2樓S011室<br>邮箱：privacy@gotapi.ai</p>
-<div class="footer"><p>&copy; 2026 Gotop Technologies Limited. 保留所有权利。</p></div>
+<div class="footer"><p>&copy; 2026 Gotop Technologies Limited. 保留所有权利。· <a href="/docs/">文档</a></p></div>
 </div>
-
 </div>
 <script>
 (function(){
-var l='en',p=new URLSearchParams(location.search),u=p.get('lang');
-if(u==='en'||u==='zh')l=u;else if(localStorage.getItem('gotapi_l'))l=localStorage.getItem('gotapi_l');else l=(navigator.language||'').startsWith('zh')?'zh':'en';
-function applyLang(v){l=v;localStorage.setItem('gotapi_l',v);document.querySelectorAll('[data-lang]').forEach(function(e){e.style.display=e.getAttribute('data-lang')===v?'block':'none'});document.documentElement.lang=v;var b=document.getElementById('langToggle');if(b)b.textContent=v==='en'?'中':'EN'}
-window.toggleLang=function(){applyLang(l==='en'?'zh':'en')};
-applyLang(l);
+  'use strict';
+  var L='en',p=new URLSearchParams(location.search),u=p.get('lang');
+  if(u==='en'||u==='zh')L=u;else if(localStorage.getItem('gotapi_l'))L=localStorage.getItem('gotapi_l');else L=(navigator.language||'').startsWith('zh')?'zh':'en';
+  function applyLang(v){
+    L=v;localStorage.setItem('gotapi_l',v);
+    document.documentElement.setAttribute('data-active-lang',v);
+    document.documentElement.lang=v;
+    var b=document.getElementById('langToggle');
+    if(b)b.textContent=v==='en'?'中':'EN';
+  }
+  window.toggleLang=function(){applyLang(L==='en'?'zh':'en')};
+  applyLang(L);
 })();
 </script>
 </body>
