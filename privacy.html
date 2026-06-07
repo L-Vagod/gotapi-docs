@@ -7,7 +7,7 @@
 <style>
 :root{--bg:#fff;--fg:#1a1a2e;--muted:#6b7280;--border:#e5e7eb;--accent:#667eea;--accent2:#764ba2}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;color:var(--fg);background:var(--bg);line-height:1.8;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;color:var(--fg);background:var(--bg);line-height:1.8}
 .nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:0 24px}
 .nav-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;height:56px;gap:24px}
 .nav-logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:16px;text-decoration:none;color:var(--fg)}
@@ -15,6 +15,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
 .nav-links{display:flex;gap:16px;margin-left:auto;align-items:center}
 .nav-links a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:500}
 .nav-links a:hover{color:var(--fg)}
+.lang-btn{background:none;border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:13px;cursor:pointer;color:var(--muted);transition:all .15s}
+.lang-btn:hover{border-color:var(--accent);color:var(--accent)}
 .container{max-width:900px;margin:0 auto;padding:48px 24px 80px}
 h1{font-size:2rem;font-weight:800;margin:0 0 4px;letter-spacing:-.02em}
 .sub{color:var(--muted);font-size:14px;margin-bottom:40px}
@@ -24,86 +26,95 @@ p{margin:0 0 14px;color:#374151;font-size:15px}
 ul{margin:0 0 14px;padding-left:20px;color:#374151;font-size:15px}
 li{margin-bottom:6px}
 strong{color:var(--fg)}
-hr{border:none;border-top:1px solid var(--border);margin:24px 0}
 .footer{text-align:center;padding:32px 0;color:var(--muted);font-size:13px;border-top:1px solid var(--border);margin-top:48px}
+[data-lang]{display:none}
+[data-lang="en"]{display:block}
 </style>
 </head>
 <body>
 <nav class="nav">
 <div class="nav-inner">
-<a class="nav-logo" href="https://gotapi.ai"><img src="https://gotapi.ai/logo.png" alt="Got API"> Got API</a>
+<a class="nav-logo" href="https://gotapi.ai"><img src="https://gotapi.ai/logo.png" alt=""> Got API</a>
 <div class="nav-links">
 <a href="https://gotapi.ai">Home</a>
 <a href="/terms.html">Terms</a>
+<button class="lang-btn" id="langToggle" onclick="toggleLang()">中</button>
 </div>
 </div>
 </nav>
 <div class="container">
 
+<div data-lang="en">
 <h1>Privacy Policy</h1>
 <p class="sub">Last Updated: June 7, 2026</p>
-
-<p><strong>Gotop Technologies Limited</strong> ("Company", "we", "us", "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our website gotapi.ai (the "Site") and our API gateway services (the "Services").</p>
-
+<p><strong>Gotop Technologies Limited</strong> ("we") is committed to protecting your privacy. This policy explains how we collect, use, and safeguard your information when you use gotapi.ai and our API gateway services.</p>
 <h2>1. Information We Collect</h2>
-<h3>1.1 Account Information</h3>
-<p>When you register for an account, we collect: name and email address, company name (if applicable), billing information (processed by our payment processor — we do not store credit card numbers), and account credentials.</p>
-
-<h3>1.2 Usage Data</h3>
-<p>When you use our API Services, we automatically collect: API request logs (timestamps, endpoint called, response status, latency), IP addresses of API requests (for rate limiting and abuse prevention), usage metrics (number of requests, tokens processed), and error logs.</p>
-
-<h3>1.3 Website Analytics</h3>
-<p>When you browse our Site, we may collect: browser type and version, operating system, referring URLs, pages visited, and device type.</p>
-
-<h3>1.4 Communication Data</h3>
-<p>If you contact us, we collect the information you provide in your communications.</p>
-
+<p><strong>Account Information:</strong> Name, email, company name (if applicable), and billing information (processed by Stripe — we do not store card details).</p>
+<p><strong>Usage Data:</strong> API request logs (timestamps, endpoints, status, latency), IP addresses, usage metrics (tokens processed), and error logs.</p>
+<p><strong>Website Analytics:</strong> Browser type, OS, referring URLs, and pages visited.</p>
+<p><strong>Communications:</strong> Information you provide when contacting us.</p>
 <h2>2. How We Use Your Information</h2>
-<p>We use the collected information for: providing and maintaining the Services (processing API requests, account management, billing), improving the Services (performance monitoring, troubleshooting, feature development), security and fraud prevention (detecting abuse, unauthorized access, and policy violations), communication (sending service updates, billing notices, and responding to inquiries), and legal compliance (meeting regulatory obligations).</p>
-
+<p>Providing services, improving performance, security/fraud prevention, communication (updates, billing), and legal compliance.</p>
 <h2>3. Data We Do NOT Collect</h2>
-<p>We do <strong>NOT</strong> intentionally collect or store: personal data of your end users (your customers' customers), content of API requests beyond what is technically necessary for routing, sensitive personal information (health data, biometrics, etc.), or payment card details (handled by our PCI-compliant payment processor).</p>
-
+<p>We do NOT collect: your end users' personal data, content of API requests beyond routing needs, sensitive personal information, or payment card details.</p>
 <h2>4. Data Storage &amp; Transfer</h2>
-<p><strong>4.1 Storage Locations:</strong> Your data is stored on servers located in the United States (New York).</p>
-<p><strong>4.2 Data Retention:</strong> Account data is retained for the duration of your account plus 90 days after termination. Usage logs are retained for up to 12 months. Billing records are retained for 7 years as required by Hong Kong law.</p>
-<p><strong>4.3 International Transfers:</strong> If you are located outside the United States, your data may be transferred to and processed in the United States. We ensure appropriate safeguards are in place for such transfers.</p>
-
-<h2>5. Data Sharing &amp; Disclosure</h2>
-<p><strong>5.1 Third-Party Service Providers:</strong> We may share your information with payment processors (e.g., Stripe), cloud infrastructure providers, and analytics providers (anonymized data).</p>
-<p><strong>5.2 Legal Requirements:</strong> We may disclose your information if required to do so by law or in response to valid legal requests.</p>
-<p><strong>5.3 Business Transfers:</strong> In the event of a merger, acquisition, or sale of assets, your information may be transferred.</p>
-<p><strong>5.4 We Do NOT Sell Your Data:</strong> We do not sell, rent, or trade your personal information to third parties for marketing purposes.</p>
-
+<p><strong>Location:</strong> United States (New York, DigitalOcean).</p>
+<p><strong>Retention:</strong> Account data: account duration + 90 days. Usage logs: up to 12 months. Billing records: 7 years (HK law).</p>
+<p><strong>International Transfers:</strong> Data may be processed in the US with appropriate safeguards.</p>
+<h2>5. Data Sharing</h2>
+<p>We share with payment processors (Stripe), cloud providers, and analytics providers (anonymized). We do NOT sell your data. We may disclose data if required by law.</p>
 <h2>6. Data Security</h2>
-<p>We implement appropriate security measures, including encryption in transit (TLS 1.2+), encryption at rest, access controls and authentication, regular security audits, and API key authentication. However, no method of transmission over the Internet is 100% secure.</p>
-
+<p>TLS 1.2+ encryption, encryption at rest, access controls, regular audits, and API key authentication.</p>
 <h2>7. Your Rights</h2>
-<p>Depending on your jurisdiction, you may have the right to: access, correct, delete, or restrict processing of your personal data; data portability; and withdraw consent. To exercise these rights, contact us at <strong>privacy@gotapi.ai</strong>.</p>
-
-<h2>8. GDPR Compliance (European Users)</h2>
-<p>If you are located in the European Economic Area (EEA):</p>
-<p><strong>8.1 Legal Basis:</strong> We process your data based on contract performance, legitimate interests (security, analytics, service improvement), and legal obligations.</p>
-<p><strong>8.2 Data Protection Officer:</strong> dpo@gotapi.ai</p>
-<p><strong>8.3 Complaints:</strong> You have the right to lodge a complaint with your local data protection authority.</p>
-
+<p>You may access, correct, delete, or restrict processing of your data. Contact: <strong>privacy@gotapi.ai</strong>.</p>
+<h2>8. GDPR (European Users)</h2>
+<p>Legal basis: contract performance, legitimate interests, legal obligations. DPO: dpo@gotapi.ai. You may lodge a complaint with your local authority.</p>
 <h2>9. Cookies</h2>
-<p><strong>9.1 What We Use:</strong> Essential cookies (required for Site functionality) and analytics cookies (to understand how visitors use our Site). We do NOT use cookies for advertising or tracking purposes.</p>
-<p><strong>9.2 Managing Cookies:</strong> You can control cookies through your browser settings.</p>
-
-<h2>10. Children's Privacy</h2>
-<p>Our Services are not directed to individuals under 18. We do not knowingly collect data from children.</p>
-
-<h2>11. Changes to This Policy</h2>
-<p>We may update this Privacy Policy from time to time. We will notify you of material changes via email or through the Site.</p>
-
-<h2>12. Contact Information</h2>
-<p><strong>Gotop Technologies Limited</strong><br>
-Room S011, 2/F, The Capital, 61-65 Chatham Road South,<br>
-Tsim Sha Tsui, Kowloon, Hong Kong<br>
-Email: privacy@gotapi.ai</p>
-
-<div class="footer"><p>&copy; 2026 Gotop Technologies Limited. All rights reserved.</p></div>
+<p>Essential cookies for site functionality. Analytics cookies (opt-in). No advertising or tracking cookies.</p>
+<h2>10. Contact</h2>
+<p>Gotop Technologies Limited<br>Room S011, 2/F, The Capital, 61-65 Chatham Road South, Tsim Sha Tsui, Hong Kong<br>Email: privacy@gotapi.ai</p>
+<div class="footer"><p>&copy; 2026 Gotop Technologies Limited.</p></div>
 </div>
+
+<div data-lang="zh" style="display:none">
+<h1>隐私政策</h1>
+<p class="sub">最后更新：2026 年 6 月 7 日</p>
+<p><strong>Gotop Technologies Limited（云珩拓科技有限公司）</strong>致力于保护您的隐私。本政策说明我们在您使用 gotapi.ai 及 API 网关服务时如何收集、使用和保护您的信息。</p>
+<h2>1. 我们收集的信息</h2>
+<p><strong>账户信息：</strong>姓名、邮箱、公司名称（如适用）、账单信息（由 Stripe 处理，我们不存储银行卡信息）。</p>
+<p><strong>使用数据：</strong>API 请求日志（时间戳、端点、状态、延迟）、IP 地址、用量指标（Token 数）、错误日志。</p>
+<p><strong>网站分析：</strong>浏览器类型、操作系统、来源 URL、访问页面。</p>
+<p><strong>通信信息：</strong>您联系我们时提供的信息。</p>
+<h2>2. 信息使用方式</h2>
+<p>提供服务、优化性能、安全防护、通信通知（更新、账单）及法律合规。</p>
+<h2>3. 我们不收集的数据</h2>
+<p>我们<strong>不</strong>收集：您的终端用户的个人数据、API 请求内容（超出路由所需）、敏感个人信息、支付卡信息。</p>
+<h2>4. 数据存储与传输</h2>
+<p><strong>存储位置：</strong>美国（纽约，DigitalOcean）。</p>
+<p><strong>保留期限：</strong>账户数据：账户存续期 + 90 天。使用日志：最长 12 个月。账单记录：7 年（香港法律要求）。</p>
+<p><strong>跨境传输：</strong>数据可能在美国处理，我们采取适当保护措施。</p>
+<h2>5. 数据共享</h2>
+<p>我们与支付处理商（Stripe）、云服务商和分析服务商（匿名化）共享数据。我们<strong>不</strong>出售您的数据。如法律要求，我们可能披露数据。</p>
+<h2>6. 数据安全</h2>
+<p>TLS 1.2+ 加密传输、静态加密、访问控制、定期审计、API Key 认证。</p>
+<h2>7. 您的权利</h2>
+<p>您有权访问、更正、删除或限制处理您的数据。联系邮箱：<strong>privacy@gotapi.ai</strong>。</p>
+<h2>8. GDPR（欧洲用户）</h2>
+<p>法律依据：合同履行、合法利益、法律义务。数据保护官：dpo@gotapi.ai。您有权向当地监管机构投诉。</p>
+<h2>9. Cookie</h2>
+<p>必要的 Cookie 用于网站功能。分析 Cookie（需选择加入）。无广告或追踪 Cookie。</p>
+<h2>10. 联系方式</h2>
+<p>Gotop Technologies Limited（云珩拓科技有限公司）<br>香港尖沙咀漆咸道南61-65號首都廣場2樓S011室<br>邮箱：privacy@gotapi.ai</p>
+<div class="footer"><p>&copy; 2026 Gotop Technologies Limited. 保留所有权利。</p></div>
+</div>
+
+</div>
+<script>
+var L='en',P=new URLSearchParams(location.search),U=P.get('lang');
+if(U==='en'||U==='zh')L=U;else if(localStorage.getItem('l'))L=localStorage.getItem('l');else L=(navigator.language||'').startsWith('zh')?'zh':'en';
+function A(l){L=l;localStorage.setItem('l',l);document.querySelectorAll('[data-lang]').forEach(function(e){e.style.display=e.getAttribute('data-lang')===l?'block':'none'});document.documentElement.lang=l;var btn=document.getElementById('langToggle');if(btn)btn.textContent=l==='en'?'中':'EN'}
+function T(){A(L==='en'?'zh':'en')}
+A(L);
+</script>
 </body>
 </html>
