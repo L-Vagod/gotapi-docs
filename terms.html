@@ -38,7 +38,7 @@ strong{color:var(--fg)}
 <div class="nav-links">
 <a href="https://gotapi.ai">Home</a>
 <a href="/privacy.html">Privacy</a>
-<button class="lang-btn" id="langToggle" onclick="T()">中</button>
+<button class="lang-btn" id="langToggle" onclick="toggleLang()">中</button>
 </div>
 </div>
 </nav>
@@ -138,11 +138,13 @@ strong{color:var(--fg)}
 
 </div>
 <script>
-var L='en',P=new URLSearchParams(location.search),U=P.get('lang');
-if(U==='en'||U==='zh')L=U;else if(localStorage.getItem('l'))L=localStorage.getItem('l');else L=(navigator.language||'').startsWith('zh')?'zh':'en';
-function A(l){L=l;localStorage.setItem('l',l);document.querySelectorAll('[data-lang]').forEach(function(e){e.style.display=e.getAttribute('data-lang')===l?'block':'none'});document.documentElement.lang=l;var btn=document.getElementById('langToggle');if(btn)btn.textContent=l==='en'?'中':'EN'}
-function T(){A(L==='en'?'zh':'en')}
-A(L);
+(function(){
+var l='en',p=new URLSearchParams(location.search),u=p.get('lang');
+if(u==='en'||u==='zh')l=u;else if(localStorage.getItem('gotapi_l'))l=localStorage.getItem('gotapi_l');else l=(navigator.language||'').startsWith('zh')?'zh':'en';
+function applyLang(v){l=v;localStorage.setItem('gotapi_l',v);document.querySelectorAll('[data-lang]').forEach(function(e){e.style.display=e.getAttribute('data-lang')===v?'block':'none'});document.documentElement.lang=v;var b=document.getElementById('langToggle');if(b)b.textContent=v==='en'?'中':'EN'}
+window.toggleLang=function(){applyLang(l==='en'?'zh':'en')};
+applyLang(l);
+})();
 </script>
 </body>
 </html>
