@@ -27,8 +27,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
 .sidebar a:hover{background:var(--card);color:var(--fg)}
 .sidebar a.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-weight:500}
 .content{flex:1;padding:40px 48px 80px;max-width:800px}
-.content h1{font-size:2rem;font-weight:800;margin:0 0 8px;letter-spacing:-.02em}
-.content h2{font-size:1.4rem;font-weight:700;margin:40px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.content h1{font-size:2rem;font-weight:800;margin:0 0 8px;letter-spacing:-.02em;scroll-margin-top:70px}
+.content h2{font-size:1.4rem;font-weight:700;margin:40px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border);scroll-margin-top:70px}
 .content h3{font-size:1.1rem;font-weight:600;margin:28px 0 8px}
 .content p{margin:0 0 16px;color:#374151;font-size:15px}
 .content ul,.content ol{margin:0 0 16px;padding-left:20px;color:#374151;font-size:15px}
@@ -159,7 +159,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
 <script>
 var L='en',P=new URLSearchParams(location.search),U=P.get('lang');
 if(U==='en'||U==='zh')L=U;else if(localStorage.getItem('l'))L=localStorage.getItem('l');else L=(navigator.language||'').startsWith('zh')?'zh':'en';
-function A(l){L=l;localStorage.setItem('l',l);document.querySelectorAll('[data-lang]').forEach(function(e){e.style.display=e.getAttribute('data-lang')===l?'block':'none'});document.documentElement.lang=l;document.getElementById('langToggle').textContent=l==='en'?'中':'EN'}
+function A(l){
+  L=l;localStorage.setItem('l',l);
+  document.querySelectorAll('[data-lang]').forEach(function(e){e.style.display=e.getAttribute('data-lang')===l?'block':'none'});
+  document.documentElement.lang=l;
+  document.getElementById('langToggle').textContent=l==='en'?'中':'EN';
+  sections=document.querySelectorAll('[data-lang="'+L+'"] h2[id]');
+  spy();
+}
 function T(){A(L==='en'?'zh':'en')}
 A(L);
 var links=document.querySelectorAll('#sidebarNav a');
@@ -173,7 +180,7 @@ links.forEach(function(a){
     if(el)el.scrollIntoView({behavior:'smooth'});
   });
 });
-var sections=document.querySelectorAll('h2[id]');
+var sections=document.querySelectorAll('[data-lang="'+L+'"] h2[id]');
 function spy(){
   var id='';
   sections.forEach(function(s){if(s.getBoundingClientRect().top<=140)id=s.id});
