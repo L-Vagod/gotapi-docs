@@ -1,3 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Got API Docs</title>
+<style>
+  :root { --bg:#fff; --fg:#1a1a2e; --muted:#6b7280; --border:#e5e7eb; --accent:#667eea; --accent2:#764ba2; --card:#f8f9fc; --code-bg:#f3f4f6; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif; color:var(--fg); background:var(--bg); line-height:1.7; }
+  .nav { position:sticky; top:0; z-index:100; background:rgba(255,255,255,0.95); backdrop-filter:blur(8px); border-bottom:1px solid var(--border); padding:0 24px; }
+  .nav-inner { max-width:1200px; margin:0 auto; display:flex; align-items:center; height:56px; gap:24px; }
+  .nav-logo { display:flex; align-items:center; gap:8px; font-weight:700; font-size:16px; text-decoration:none; color:var(--fg); }
+  .nav-logo img { width:24px; height:24px; border-radius:6px; }
+  .nav-links { display:flex; gap:16px; margin-left:auto; align-items:center; }
+  .nav-links a { text-decoration:none; color:var(--muted); font-size:14px; font-weight:500; transition:color .2s; }
+  .nav-links a:hover { color:var(--fg); }
+  .lang-btn { background:none; border:1px solid var(--border); border-radius:6px; padding:4px 10px; font-size:13px; cursor:pointer; color:var(--muted); transition:all .15s; }
+  .lang-btn:hover { border-color:var(--accent); color:var(--accent); }
+  .layout { display:flex; max-width:1200px; margin:0 auto; min-height:calc(100vh - 56px); }
+  .sidebar { width:240px; flex-shrink:0; padding:32px 12px 32px 0; border-right:1px solid var(--border); position:sticky; top:56px; height:calc(100vh - 56px); overflow-y:auto; }
+  .sidebar::-webkit-scrollbar { width:4px; }
+  .sidebar::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
+  .sidebar-group { margin-bottom:20px; }
+  .sidebar-group-title { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; color:var(--muted); margin-bottom:6px; padding-left:12px; }
+  .sidebar a { display:block; padding:6px 12px; font-size:14px; color:var(--muted); text-decoration:none; border-radius:6px; transition:all .15s; scroll-margin-top:70px; }
+  .sidebar a:hover { background:var(--card); color:var(--fg); }
+  .sidebar a.active { background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; font-weight:500; }
+  .content { flex:1; padding:40px 48px 80px; max-width:800px; }
+  .content h1 { font-size:2rem; font-weight:800; margin:0 0 8px; letter-spacing:-0.02em; }
+  .content h2 { font-size:1.4rem; font-weight:700; margin:40px 0 12px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+  .content h3 { font-size:1.1rem; font-weight:600; margin:28px 0 8px; }
+  .content p { margin:0 0 16px; color:#374151; font-size:15px; }
+  .content ul,.content ol { margin:0 0 16px; padding-left:20px; color:#374151; font-size:15px; }
+  .content li { margin-bottom:4px; }
+  .content code { background:var(--code-bg); padding:2px 6px; border-radius:4px; font-size:13px; font-family:'SF Mono','Fira Code',monospace; }
+  .content pre { background:#1e1e2e; color:#cdd6f4; padding:16px 20px; border-radius:10px; overflow-x:auto; font-size:13px; line-height:1.6; margin:0 0 20px; font-family:'SF Mono','Fira Code',monospace; }
+  .content pre code { background:none; padding:0; font-size:13px; color:inherit; }
+  .card { background:var(--card); border-radius:10px; padding:20px; margin:0 0 16px; }
+  .card h4 { font-size:14px; font-weight:600; margin-bottom:4px; }
+  .card p { font-size:14px; color:var(--muted); margin:0; }
+  .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:0 0 20px; }
+  .tag { display:inline-block; padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; margin-right:6px; margin-bottom:6px; }
+  .tag-blue { background:#eef2ff; color:#4f46e5; }
+  .tag-green { background:#ecfdf5; color:#059669; }
+  .tag-purple { background:#f5f3ff; color:#7c3aed; }
+  .tag-orange { background:#fff7ed; color:#ea580c; }
+  .faq-item { border-bottom:1px solid var(--border); padding:16px 0; }
+  .faq-item h4 { font-size:15px; font-weight:600; margin-bottom:6px; cursor:pointer; }
+  .faq-item h4:hover { color:var(--accent); }
+  .faq-item p { font-size:14px; color:var(--muted); margin:0; }
+  .footer { text-align:center; padding:32px 0; color:var(--muted); font-size:13px; border-top:1px solid var(--border); margin-top:48px; }
+  [data-lang] { display:none; }
+  [data-lang="en"] { display:block; }
+  @media (max-width:768px) { .sidebar { display:none; } .content { padding:24px 20px 60px; } .grid-2 { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="/">
+      <img src="https://gotapi.ai/logo.png" alt="Got API">
+      Got API
+    </a>
+    <div class="nav-links">
+      <a href="https://gotapi.ai">Home</a>
+      <button class="lang-btn" id="langToggle" onclick="toggleLang()">中</button>
+    </div>
+  </div>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-group">
+      <div class="sidebar-group-title" data-lang="en">Getting Started</div>
+      <div class="sidebar-group-title" data-lang="zh" style="display:none">快速开始</div>
+      <a href="#quickstart">Quick Start</a>
+      <a href="#register">Sign Up &amp; Login</a>
+      <a href="#api-key">Get API Key</a>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-group-title" data-lang="en">User Guide</div>
+      <div class="sidebar-group-title" data-lang="zh" style="display:none">用户指南</div>
+      <a href="#api-usage">Using the API</a>
+      <a href="#token">Token Management</a>
+      <a href="#models">Models &amp; Pricing</a>
+      <a href="#apps">Client Integration</a>
+      <a href="#logs">Usage Logs</a>
+      <a href="#topup">Billing &amp; Top-Up</a>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-group-title" data-lang="en">Platform</div>
+      <div class="sidebar-group-title" data-lang="zh" style="display:none">平台信息</div>
+      <a href="#integrations">Ecosystem</a>
+      <a href="#security">Security &amp; Compliance</a>
+      <a href="#faq">FAQ</a>
+    </div>
+  </aside>
+
+  <main class="content">
+
+    <!-- ===== ENGLISH ===== -->
+    <div data-lang="en">
+
+    <h1>Got API Documentation</h1>
+    <p style="font-size:16px;color:var(--muted);margin-bottom:32px;">Unified API Gateway — one endpoint to access hundreds of AI models. Fully compatible with the OpenAI API format.</p>
+
+    <h2 id="quickstart">Quick Start</h2>
+    <p>Got API exposes a fully OpenAI-compatible API. Use any OpenAI SDK with your custom base URL and API key.</p>
+    <h3>1. API Endpoint</h3>
+    <pre><code>https://gotapi.ai/v1</code></pre>
+    <h3>2. Chat Completion (cURL)</h3>
+    <pre><code>curl https://gotapi.ai/v1/chat/completions \
+  -H "Authorization: Bearer ***" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gpt-4o",
+    "messages": [{"role": "user", "content": "Hello!"}]
+  }'</code></pre>
+    <h3>3. Python (OpenAI SDK)</h3>
+    <pre><code>from openai import OpenAI
+client = OpenAI(base_url="https://gotapi.ai/v1", api_key="***")
+response = client.chat.completions.create(
+    model="gpt-4o",
+    messages=[{"role": "user", "content": "Hello!"}]
+)
+print(response.choices[0].message.content)</code></pre>
+    <h3>4. Node.js (OpenAI SDK)</h3>
+    <pre><code>import OpenAI from 'openai';
+const client = new OpenAI({ baseURL: 'https://gotapi.ai/v1', apiKey: '***' });
+const response = await client.chat.completions.create({
+  model: 'gpt-4o',
+  messages: [{ role: 'user', content: 'Hello!' }]
+});
+console.log(response.choices[0].message.content);</code></pre>
+
+    <h2 id="register">Sign Up &amp; Login</h2>
+    <p>Got API supports multiple ways to create and access your account:</p>
+    <ul>
+      <li><strong>Email &amp; Password</strong> — Register with your email address</li>
+      <li><strong>GitHub OAuth</strong> — Sign in with your GitHub account</li>
+      <li><strong>Discord OAuth</strong> — Sign in with your Discord account</li>
+    </ul>
+
+    <h2 id="api-key">Get API Key</h2>
+    <p>After logging in, go to <strong>API Keys</strong> and click "Create Token". Name it, set restrictions (optional), and copy the token immediately.</p>
+
+    <h2 id="api-usage">Using the API</h2>
+    <p>Compatible with OpenAI, Claude, Gemini formats. Supported endpoints:</p>
+    <ul>
+      <li><code>POST /v1/chat/completions</code> — Chat completions</li>
+      <li><code>GET /v1/models</code> — List models</li>
+    </ul>
+
+    <h2 id="token">Token Management</h2>
+    <p>Per-token settings: quota limit, model restriction, IP whitelist, auto-expiry.</p>
+
+    <h2 id="models">Models &amp; Pricing</h2>
+    <p>Browse <strong>Model Square</strong> for full list and real-time pricing. 100+ models supported.</p>
+
+    <h2 id="apps">Client Integration</h2>
+    <p>One-click config for Cherry Studio, Lobe Chat, OpenCat, DeepChat, AI as Workspace, and more.</p>
+
+    <h2 id="logs">Usage Logs</h2>
+    <p>View records, filter, chart, and export your API call data.</p>
+
+    <h2 id="topup">Billing &amp; Top-Up</h2>
+    <p>Stripe (USD), redemption codes, monthly/yearly subscriptions.</p>
+
+    <h2 id="integrations">Ecosystem</h2>
+    <p><span class="tag tag-blue">50+ Providers</span><span class="tag tag-green">100+ Models</span><span class="tag tag-purple">50+ Routes</span><span class="tag tag-orange">10+ Scheduling</span></p>
+
+    <h2 id="security">Security &amp; Compliance</h2>
+    <p>HTTPS / API Key / Token ACL / RBAC / 2FA / OAuth / Data Export</p>
+
+    <h2 id="faq">FAQ</h2>
+    <div class="faq-item"><h4>How is pricing calculated?</h4><p>Per-token based on each model's rate. See Model Square.</p></div>
+    <div class="faq-item"><h4>Is my data secure?</h4><p>HTTPS encryption, IP whitelist, model-level restrictions.</p></div>
+    <div class="faq-item"><h4>Which AI models?</h4><p>100+ models: OpenAI, Claude, Gemini, Llama, DeepSeek, etc.</p></div>
+    <div class="faq-item"><h4>Data storage?</h4><p>Global data centers. No persistent storage of conversations.</p></div>
+    <div class="faq-item"><h4>Streaming?</h4><p>Yes, SSE supported.</p></div>
+    <div class="faq-item"><h4>Support?</h4><p><a href="mailto:support@gotapi.ai">support@gotapi.ai</a></p></div>
+
+    <div class="footer">
+      <p>&copy; 2026 Gotop Technologies Limited. All rights reserved.</p>
+      <p>Room S011, 2/F, The Capital, 61-65 Chatham Road South, Tsim Sha Tsui, Hong Kong</p>
+    </div>
+    </div>
+
+    <div data-lang="zh" style="display:none">
+    <h1>Got API 文档</h1>
+    <p style="font-size:16px;color:var(--muted);margin-bottom:32px;">统一 API 网关，服务于海量 AI 模型。</p>
+    <h2 id="quickstart">快速入门</h2>
+    <pre><code>https://gotapi.ai/v1</code></pre>
+    <h2 id="register">注册与登录</h2>
+    <p>邮箱 / GitHub / Discord</p>
+    <h2 id="api-key">获取 API Key</h2>
+    <p>控制台 → API Keys → 创建令牌</p>
+    <h2 id="api-usage">使用 API</h2>
+    <p>兼容 OpenAI 标准接口</p>
+    <h2 id="token">令牌管理</h2>
+    <p>配额 / 模型 / IP / 过期</p>
+    <h2 id="models">模型与定价</h2>
+    <p>模型广场查看</p>
+    <h2 id="apps">客户端集成</h2>
+    <p>Cherry Studio / Lobe Chat / OpenCat 等</p>
+    <h2 id="logs">使用记录</h2>
+    <p>记录 / 筛选 / 图表 / 导出</p>
+    <h2 id="topup">充值</h2>
+    <p>Stripe / 兑换码 / 订阅</p>
+    <h2 id="integrations">生态</h2>
+    <p>50+ 上游 / 100+ 模型</p>
+    <h2 id="security">安全</h2>
+    <p>HTTPS / API Key / 2FA / OAuth</p>
+    <h2 id="faq">FAQ</h2>
+    <div class="faq-item"><h4>定价？</h4><p>按 Token</p></div>
+    <div class="faq-item"><h4>安全？</h4><p>HTTPS + 白名单</p></div>
+    <div class="faq-item"><h4>模型？</h4><p>100+</p></div>
+    <div class="faq-item"><h4>联系？</h4><p><a href="mailto:support@gotapi.ai">support@gotapi.ai</a></p></div>
+    <div class="footer"><p>&copy; 2026 Gotop Technologies Limited.</p></div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+var gotapiLang = 'en';
+var urlParams = new URLSearchParams(window.location.search);
+var urlLang = urlParams.get('lang');
+if (urlLang === 'en' || urlLang === 'zh') {
+  gotapiLang = urlLang;
+} else if (localStorage.getItem('gotapi_lang')) {
+  gotapiLang = localStorage.getItem('gotapi_lang');
+} else {
+  gotapiLang = (navigator.language || '').toLowerCase().startsWith('zh') ? 'zh' : 'en';
+}
+
 function applyLang(lang) {
   gotapiLang = lang;
   localStorage.setItem('gotapi_lang', lang);
@@ -7,3 +245,27 @@ function applyLang(lang) {
   document.documentElement.lang = lang;
   document.getElementById('langToggle').textContent = lang === 'en' ? '中' : 'EN';
 }
+
+function toggleLang() { applyLang(gotapiLang === 'en' ? 'zh' : 'en'); }
+
+applyLang(gotapiLang);
+
+var sections = document.querySelectorAll('h2[id]');
+var sidebarLinks = document.querySelectorAll('.sidebar a[href^="#"]');
+function updateActiveLink() {
+  var currentId = '';
+  sections.forEach(function(s) { if (s.getBoundingClientRect().top <= 120) currentId = s.id; });
+  sidebarLinks.forEach(function(l) { l.classList.toggle('active', l.getAttribute('href') === '#' + currentId); });
+}
+window.addEventListener('scroll', updateActiveLink);
+window.addEventListener('load', function() { setTimeout(updateActiveLink, 100); });
+sidebarLinks.forEach(function(l) {
+  l.addEventListener('click', function(e) {
+    e.preventDefault();
+    var el = document.getElementById(l.getAttribute('href').substring(1));
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>
